@@ -1,0 +1,16 @@
+{
+    "name": "joem/saturn",
+    "description": "Object-based post-type management in WordPress.",
+    "authors": [
+        {
+            "name": "Joe Moses",
+            "email": "info@joemoses.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Joem\\Saturn\\": "src/"
+        }
+    },
+    "require": {}
+}
