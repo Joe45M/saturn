@@ -153,4 +153,4 @@ $saturn->query()
 
 Type: `Object` `Saturn`
 
-Sets the number of objects to return from a query. The query engine will return the FIRST n matches if specified.
+Sets the meta_query for the query.
