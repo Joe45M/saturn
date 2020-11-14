@@ -108,3 +108,49 @@ before setting up queries** to prevent any strange or unexpected results.
 Type: `Object` `Saturn`
 
 Sets the number of objects to return from a query. The query engine will return the FIRST n matches if specified.
+
+
+#### meta
+
+**Parameters** 
+- **metaQuery** (array) - An array which can contain a single key-value pair, where the key is the meta slug, and the 
+value is the meta value. You can query multiple meta values by instead passing an array of arrays which contain the 
+key-value pair.
+
+- **queryConfig** (array) - A list of key-value config items, which would otherwise be provided inside of `meta_query`.
+An example of config item would be `relation`. Not required.
+
+**Usage** 
+
+Single meta query:
+```php
+$saturn->query()
+    ->meta( ['name' => 'joe'] )
+    ->runQuery();
+```
+
+
+Multiple meta queries:
+```php
+$saturn->query()
+    ->meta([
+        ['name' => 'joe'],
+        ['age' => 43]])
+    ->runQuery();
+```
+
+Multiple meta queries with config:
+```php
+$saturn->query()
+    ->meta([
+        ['name' => 'joe'],
+        ['age' => 43]],
+        ['relation' => 'AND'])
+    ->runQuery();
+```
+
+**Return** 
+
+Type: `Object` `Saturn`
+
+Sets the number of objects to return from a query. The query engine will return the FIRST n matches if specified.

@@ -54,28 +54,7 @@ class SaturnQuery
         $args = $this->getQueryArgs();
 
 
-        foreach($metaQuery as $key => $meta) {
-
-            $wpArgs = [];
-
-            if(gettype($meta) == 'array') {
-                foreach($meta as $metaKey => $metaValue) {
-                    $wpArgs = array(
-                        'key' => $metaKey,
-                        'value' => $metaValue
-                    );
-                }
-            } else {
-                $wpArgs = array(
-                    'key' => $key,
-                    'value' => $meta
-                );
-            }
-
-
-
-            $args['meta_query'][] = $wpArgs;
-        }
+        $args['meta_query'] = Walkable::walk($metaQuery);
 
         if(count($queryConfig)) {
             foreach($queryConfig as $key => $config) {
