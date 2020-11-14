@@ -1,5 +1,5 @@
 
-![Image of Yaktocat](https://joemoses.dev/saturn-logo.png)
+![Logo](https://joemoses.dev/saturn-logo.png)
 # Saturn 
 #### An object-mapped post type builder &amp; interface for WordPress.
 
