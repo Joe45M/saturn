@@ -29,7 +29,7 @@ The query builder wraps `get_posts`, which means everything in `get_posts` is po
 a beautifully simple interface. 
 
 ## Create an instance
-Creating an instance is simple:
+Creating an instance of Saturn is simple:
 ```php
 // Provide arguments.
 $args = array(
@@ -45,8 +45,66 @@ $saturn = new Saturn($args);
 
 Saturn requires an array of parameters, which are used to construct the post type and create the instance:
 
-### Arguments
+### Parameters
 - **slug** (string) - The slug used to identify the post type.
 - **singular**  (string) - The singular name of the post type - human readable, used in labels.
 - **plural**  (string) - The plural name of the post type - human readable, used in labels.
 - **namespace** (string) - The text & theme namespace (often referred to as domain) for the text strings.
+
+## Instance methods
+Methods which are available in an instance of Saturn are detailed below.
+
+#### instance
+
+**Usage** 
+
+`$saturn->instance();`
+
+**Return** 
+
+Type: `Object` `WP_Post_Type`
+
+An instance of a post type. We do not recommend altering its contents - instead, use Saturn methods. Helpful to quickly 
+access the object.
+
+
+#### instance
+
+**Usage** 
+
+`$saturn->instance();`
+
+**Return** 
+
+Type: `Object` `WP_Post_Type`
+
+An instance of a post type. We do not recommend altering its contents - instead, use Saturn methods. Helpful to quickly 
+access the object.
+
+#### query
+
+**Usage** 
+
+`$saturn->query();`
+
+**Return** 
+
+Type: `Object` `Saturn`
+
+Used to clear any lingering paramaters in the query engine from previous queries. It is important to **use this method
+before setting up queries** to prevent any strange or unexpected results.
+
+#### limit
+
+**Parameters** 
+- **quantity** (int) - The quantity of objects to return for a specified query.
+
+**Usage** 
+
+`$saturn->limit( 15 );`
+
+**Return** 
+
+Type: `Object` `Saturn`
+
+Sets the number of objects to return from a query. The query engine will return the FIRST n matches if specified.

@@ -4,6 +4,8 @@ namespace Joem\Saturn;
 
 class Saturn extends SaturnQuery
 {
+    use Args;
+
     protected $slug;
     protected $args;
     protected $instance;
@@ -42,7 +44,7 @@ class Saturn extends SaturnQuery
             'name'                => _x( $args['plural'], 'Post Type General Name', $args['namespace'] ),
             'singular_name'       => _x( $args['singular'], 'Post Type Singular Name', $args['namespace'] ),
             'menu_name'           => __( $args['plural'], $args['namespace'] ),
-            'parent_item_colon'   => __( 'Parent Movie', $args['namespace'] ),
+            'parent_item_colon'   => __( 'Parent ' . $args['singular'], $args['namespace'] ),
             'all_items'           => __( 'All ' . $args['plural'], $args['namespace'] ),
             'view_item'           => __( 'View ' . $args['singular'], $args['namespace'] ),
             'add_new_item'        => __( 'Add New ' . $args['singular'], $args['namespace'] ),
@@ -55,17 +57,11 @@ class Saturn extends SaturnQuery
         );
 
         $cpt_args = array(
-            'label'               => __( $args['singular'], 'twentytwenty' ),
-            'description'         => __( '', 'twentytwenty' ),
+            'label'               => __( $args['singular'], $args['namespace'] ),
+            'description'         => __( '', $args['namespace'] ),
             'labels'              => $labels,
-            // Features this CPT supports in Post Editor
-            'supports'            => array( 'title', 'editor', 'excerpt', 'author', 'thumbnail', 'comments', 'revisions', 'custom-fields', ),
-            // You can associate this CPT with a taxonomy or custom taxonomy.
-            'taxonomies'          => array( 'genres' ),
-            /* A hierarchical CPT is like Pages and can have
-            * Parent and child items. A non-hierarchical CPT
-            * is like Posts.
-            */
+            'supports'            => $args['supports'],
+            'taxonomies'          => $args['taxonomies'],
             'hierarchical'        => false,
             'public'              => true,
             'show_ui'             => true,
@@ -96,6 +92,7 @@ class Saturn extends SaturnQuery
     public function instance () {
         return $this->getInstance();
     }
+
     /**
      * @return mixed
      */
@@ -109,7 +106,9 @@ class Saturn extends SaturnQuery
      */
     protected function setArgs($args)
     {
-        $this->args = $args;
+        $default_args = $this->getDefaultArgs();
+
+        $this->args = array_merge($default_args, $args);
     }
 
     /**
