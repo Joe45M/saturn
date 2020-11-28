@@ -88,6 +88,23 @@ class SaturnQuery
     }
 
     /**
+     * Add a tax query to the query params.
+     *
+     * @param array $taxQuery Taxonomy query array, as per WP_Query.
+     * @return $this
+     */
+    public function tax(Array $taxQuery) {
+        $args = $this->getQueryArgs();
+
+        $args['tax_query'][] = $taxQuery;
+
+        $this->setQueryArgs($args);
+
+        return $this;
+
+    }
+
+    /**
      * Feed our $this->queryArgs to get_posts which will return a list of WordPress
      * @return int[]|\WP_Post[]
      */

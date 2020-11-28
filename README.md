@@ -69,19 +69,6 @@ An instance of a post type. We do not recommend altering its contents - instead,
 access the object.
 
 
-#### instance
-
-**Usage** 
-
-`$saturn->instance();`
-
-**Return** 
-
-Type: `Object` `WP_Post_Type`
-
-An instance of a post type. We do not recommend altering its contents - instead, use Saturn methods. Helpful to quickly 
-access the object.
-
 #### query
 
 **Usage** 
@@ -92,7 +79,7 @@ access the object.
 
 Type: `Object` `Saturn`
 
-Used to clear any lingering paramaters in the query engine from previous queries. It is important to **use this method
+Used to clear any lingering parameters in the query engine from previous queries. It is important to **use this method
 before setting up queries** to prevent any strange or unexpected results.
 
 #### limit
@@ -155,3 +142,20 @@ $saturn->query()
 Type: `Object` `Saturn`
 
 Sets the meta_query for the query.
+
+#### tax
+
+Add a tax_query to the query.
+**Parameters** 
+- **taxQuery** (array) - An array containing a single taxonomy query, to the spec of `WP_Query`'s `tax_query` parameter.
+
+**Usage** 
+```php
+$saturn->query()
+    ->tax([
+        'taxonomy' => 'people',
+        'field'    => 'slug',
+        'terms'    => 'bob',
+    ])
+    ->runQuery();
+```
