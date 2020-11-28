@@ -62,19 +62,19 @@ class Saturn extends SaturnQuery
             'labels'              => $labels,
             'supports'            => $args['supports'],
             'taxonomies'          => $args['taxonomies'],
-            'hierarchical'        => false,
-            'public'              => true,
-            'show_ui'             => true,
-            'show_in_menu'        => true,
-            'show_in_nav_menus'   => true,
-            'show_in_admin_bar'   => true,
-            'menu_position'       => 5,
-            'can_export'          => true,
-            'has_archive'         => true,
-            'exclude_from_search' => false,
-            'publicly_queryable'  => true,
-            'capability_type'     => 'post',
-            'show_in_rest' => true,
+            'hierarchical'        => $args['hierarchical'],
+            'public'              => $args['taxonomies'],
+            'show_ui'             => $args['show_ui'],
+            'show_in_menu'        => $args['show_in_menu'],
+            'show_in_nav_menus'   => $args['show_in_nav_menus'],
+            'show_in_admin_bar'   => $args['show_in_admin_bar'],
+            'menu_position'       => $args['menu_position'],
+            'can_export'          => $args['can_export'],
+            'has_archive'         => $args['has_archive'],
+            'exclude_from_search' => $args['exclude_from_search'],
+            'publicly_queryable'  => $args['publicly_queryable'],
+            'capability_type'     => $args['capability_type'],
+            'show_in_rest'        => $args['show_in_rest'],
 
         );
 
@@ -102,6 +102,7 @@ class Saturn extends SaturnQuery
     }
 
     /**
+     * Merge the provided arguments with our list of defaults which are provided by the Args trait.
      * @param mixed $args
      */
     protected function setArgs($args)
