@@ -40,6 +40,29 @@ class SaturnQuery
     }
 
     /**
+     * Order the results of the query. This method combines both 'orderby' (as index) & 'order'(as sort) from the
+     * traditional get_posts argument params.
+     *
+     *
+     * @param $index string The index to order by.
+     *
+     * @param $sort string the direction to sort by.
+     *
+     * @return $this
+     */
+    public function order($index, $sort)
+    {
+        $args = $this->getQueryArgs();
+
+        $args['orderby'] = $index;
+        $args['order']   = $sort;
+
+        $this->setQueryArgs($args);
+
+        return $this;
+    }
+
+    /**
      * Append a meta query to the argument list of this instance. We've gone out of our way to create a more intuitive
      * system to append these, since the original is overly verbose and clunky - especially when you're running a small
      * query.
