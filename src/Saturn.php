@@ -11,13 +11,14 @@ class Saturn extends SaturnQuery
     protected $instance;
     protected $query;
 
-    public function __construct(Array $config)
+    public function __construct(array $config)
     {
         $this->setArgs($config);
         $this->createFromArgs();
     }
 
-    public function add($atts) {
+    public function add($atts)
+    {
 
     }
 
@@ -34,51 +35,52 @@ class Saturn extends SaturnQuery
      * @return $this
      * @since 0.0.1
      */
-    public function createFromArgs( $config = [] ) {
+    public function createFromArgs($config = [])
+    {
 
-        if( $config ) $this->setArgs( $config );
+        if ($config) $this->setArgs($config);
 
         $args = $this->getArgs();
 
         $labels = array(
-            'name'                => _x( $args['plural'], 'Post Type General Name', $args['namespace'] ),
-            'singular_name'       => _x( $args['singular'], 'Post Type Singular Name', $args['namespace'] ),
-            'menu_name'           => __( $args['plural'], $args['namespace'] ),
-            'parent_item_colon'   => __( 'Parent ' . $args['singular'], $args['namespace'] ),
-            'all_items'           => __( 'All ' . $args['plural'], $args['namespace'] ),
-            'view_item'           => __( 'View ' . $args['singular'], $args['namespace'] ),
-            'add_new_item'        => __( 'Add New ' . $args['singular'], $args['namespace'] ),
-            'add_new'             => __( 'Add New', $args['namespace'] ),
-            'edit_item'           => __( 'Edit ' . $args['singular'], $args['namespace'] ),
-            'update_item'         => __( 'Update ' . $args['singular'], $args['namespace'] ),
-            'search_items'        => __( 'Search ' . $args['singular'], $args['namespace'] ),
-            'not_found'           => __( 'Not Found', $args['namespace'] ),
-            'not_found_in_trash'  => __( 'Not found in Trash', $args['namespace'] ),
+            'name' => _x($args['plural'], 'Post Type General Name', $args['namespace']),
+            'singular_name' => _x($args['singular'], 'Post Type Singular Name', $args['namespace']),
+            'menu_name' => __($args['plural'], $args['namespace']),
+            'parent_item_colon' => __('Parent ' . $args['singular'], $args['namespace']),
+            'all_items' => __('All ' . $args['plural'], $args['namespace']),
+            'view_item' => __('View ' . $args['singular'], $args['namespace']),
+            'add_new_item' => __('Add New ' . $args['singular'], $args['namespace']),
+            'add_new' => __('Add New', $args['namespace']),
+            'edit_item' => __('Edit ' . $args['singular'], $args['namespace']),
+            'update_item' => __('Update ' . $args['singular'], $args['namespace']),
+            'search_items' => __('Search ' . $args['singular'], $args['namespace']),
+            'not_found' => __('Not Found', $args['namespace']),
+            'not_found_in_trash' => __('Not found in Trash', $args['namespace']),
         );
 
         $cpt_args = array(
-            'label'               => __( $args['singular'], $args['namespace'] ),
-            'description'         => __( '', $args['namespace'] ),
-            'labels'              => $labels,
-            'supports'            => $args['supports'],
-            'taxonomies'          => $args['taxonomies'],
-            'hierarchical'        => $args['hierarchical'],
-            'public'              => $args['taxonomies'],
-            'show_ui'             => $args['show_ui'],
-            'show_in_menu'        => $args['show_in_menu'],
-            'show_in_nav_menus'   => $args['show_in_nav_menus'],
-            'show_in_admin_bar'   => $args['show_in_admin_bar'],
-            'menu_position'       => $args['menu_position'],
-            'can_export'          => $args['can_export'],
-            'has_archive'         => $args['has_archive'],
+            'label' => __($args['singular'], $args['namespace']),
+            'description' => __('', $args['namespace']),
+            'labels' => $labels,
+            'supports' => $args['supports'],
+            'taxonomies' => $args['taxonomies'],
+            'hierarchical' => $args['hierarchical'],
+            'public' => $args['taxonomies'],
+            'show_ui' => $args['show_ui'],
+            'show_in_menu' => $args['show_in_menu'],
+            'show_in_nav_menus' => $args['show_in_nav_menus'],
+            'show_in_admin_bar' => $args['show_in_admin_bar'],
+            'menu_position' => $args['menu_position'],
+            'can_export' => $args['can_export'],
+            'has_archive' => $args['has_archive'],
             'exclude_from_search' => $args['exclude_from_search'],
-            'publicly_queryable'  => $args['publicly_queryable'],
-            'capability_type'     => $args['capability_type'],
-            'show_in_rest'        => $args['show_in_rest'],
+            'publicly_queryable' => $args['publicly_queryable'],
+            'capability_type' => $args['capability_type'],
+            'show_in_rest' => $args['show_in_rest'],
 
         );
 
-        $created_type = register_post_type( $args['slug'], $cpt_args );
+        $created_type = register_post_type($args['slug'], $cpt_args);
         $this->setInstance($created_type);
 
         return $this;
@@ -89,7 +91,8 @@ class Saturn extends SaturnQuery
      * post type, which is set in $this->createFromArgs.
      * @return mixed
      */
-    public function instance () {
+    public function instance()
+    {
         return $this->getInstance();
     }
 
@@ -126,5 +129,16 @@ class Saturn extends SaturnQuery
     protected function setInstance($instance)
     {
         $this->instance = $instance;
+    }
+
+    /**
+     * Unregister the post type - but do not unset the class instance.
+     * @return $this
+     */
+    public function destroy()
+    {
+        unregister_post_type($this->instance()->name);
+
+        return $this;
     }
 }

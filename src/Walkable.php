@@ -19,14 +19,15 @@ trait Walkable
      * @param array $walk
      * @return array
      */
-    public static function walk(Array $walk) {
+    public static function walk(array $walk)
+    {
 
         $wpArgs = [];
 
-        foreach($walk as $key => $step) {
+        foreach ($walk as $key => $step) {
 
-            if(gettype($step) == 'array') {
-                foreach($step as $stepKey => $stepValue) {
+            if (gettype($step) == 'array') {
+                foreach ($step as $stepKey => $stepValue) {
                     $wpArgs[] = array(
                         'key' => $stepKey,
                         'value' => $stepValue
